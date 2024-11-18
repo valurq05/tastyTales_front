@@ -1,13 +1,14 @@
 <template>
-  <footer class="footer text-white p-4">
-  <div class="container">
-    <div class="row">
+  <footer class="footer text-white">
+  <div class=" d-flex align-items-center">
 
-      <div class="col-12 col-md-3 d-flex align-items-end mb-3 mb-md-0">
-        <img src="../assets/Muñeca.jpg" alt="Chef" class="img-fluid" style="max-height: 300px;">
+    <div class="">
+        <img src="../assets/Muñeca.jpg" alt="Chef" class="img-fluid">
       </div>
-      
-      <div class="col-6 col-md-3">
+
+    <div class="footer-text">
+      <div class="row justify-content-center justify-content-between">
+        <div class="col-6 col-md-3">
         <h5 class="fw-bold">Información</h5>
         <ul class="list-unstyled">
           <li><a href="#" class="text-white text-decoration-none">Centro de Ayuda</a></li>
@@ -28,20 +29,23 @@
       </div>
       
       <div class="col-12 col-md-3 text-center text-md-end">
-        <h5 class="fw-bold">Visítanos para estar al día de nuevas recetas</h5>
-        <div class="d-flex justify-content-center justify-content-md-end gap-2">
+        <h5 class="text-center">Visítanos para estar al día de nuevas recetas</h5>
+        <div class="socials d-flex justify-content-center justify-content-md-end gap-2">
           <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+          <a href="#" class="text-white"><i class="fa-brands fa-square-x-twitter"></i></a>
           <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
           <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
           <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
-    </div>
- 
-    <hr class="text-white my-3">
 
-    <div class="text-center">
+      <hr class="text-white my-3">
+
+      <div class="text-center">
       <small>© 2024 TastyTales</small>
+      </div>
+
+      </div>
     </div>
   </div>
 </footer>
@@ -51,6 +55,15 @@
 
 .footer{
     background-color: #ac1c24;
+}
+
+.socials a{
+  padding: 3%;
+  font-size: 25px;
+}
+
+.footer-text li{
+  padding-top: 3%;
 }
 
 </style>

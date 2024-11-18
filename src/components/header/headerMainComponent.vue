@@ -1,5 +1,5 @@
 <template>
-    <div class="header row align-items-center">
+    <div class="header d-flex align-items-center">
       <div class="col-6 col-md-5">
         <div class="pb-2">
           <a href="#" class="logo-link"></a>
@@ -16,7 +16,7 @@
 .logo-link {
     display: inline-block;
     margin: 0 8%;
-    width: 250px; 
+    width: 200px; 
     height: 100px;
     background-image: url('../../assets/TastyTalesLogo.png');
     background-repeat: no-repeat;
