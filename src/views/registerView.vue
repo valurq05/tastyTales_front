@@ -12,7 +12,7 @@
 
 <template>
     <div class="container d-flex justify-content-center align-items-center vh-100">
-      <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
+      <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%;">
         <h2 class="text-center mb-4">Registrarse</h2>
         <FormKit 
           type="form" @submit="handleSubmit"
@@ -77,7 +77,7 @@
           </div>
   
           <p class="text-center mt-2 mb-4">
-            <RouterLink to="login" class="text-decoration-none">¿Ya tiene una cuenta? Inicie sesión aquí</RouterLink>
+            <RouterLink :to="{name:'login'}" class="text-decoration-none">¿Ya tiene una cuenta? Inicie sesión aquí</RouterLink>
           </p>
   
           <div class="d-flex justify-content-center mb-3">

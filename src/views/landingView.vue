@@ -7,7 +7,8 @@
         <p class="pt-2">
           Publica, edita y califica recetas. Sigue tutoriales paso a paso y comparte tu pasión por la cocina. ¡Inspírate y cocina con confianza!
         </p>
-        <button class="btn btn-custom btn-lg fw-semibold">Registrarse</button>
+        <RouterLink to="register" class="btn btn-custom btn-lg fw-semibold">Registrarse</RouterLink>
+
       </div>
       <div class="col-md-6 text-center">
         <img src="../assets/f_bandejitapaisa.png" alt="Comida" class="img-fluid rounded diagonal-image">

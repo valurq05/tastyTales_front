@@ -7,11 +7,11 @@
     <div class="header d-flex align-items-center">
       <div class="col-6 col-md-5">
         <div class="pb-2">
-          <a href="#" class="logo-link"></a>
+          <RouterLink :to="{name:'home'}" class="logo-link"></RouterLink>
         </div>
       </div>
       <div class="col-6 col-md-7 text-end">
-        <RouterLink to="login" class="btn fw-semibold text-light">Iniciar Sesión</RouterLink>
+        <RouterLink :to="{name:'login'}" class="btn fw-semibold text-light">Iniciar Sesión</RouterLink>
       </div>
     </div>
   </template>  
