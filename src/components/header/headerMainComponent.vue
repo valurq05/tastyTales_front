@@ -1,3 +1,8 @@
+<script setup>
+  import {RouterLink} from 'vue-router';
+</script>
+
+
 <template>
     <div class="header d-flex align-items-center">
       <div class="col-6 col-md-5">
@@ -6,7 +11,7 @@
         </div>
       </div>
       <div class="col-6 col-md-7 text-end">
-        <button class="btn fw-semibold text-light">Iniciar Sesión</button>
+        <RouterLink to="login" class="btn fw-semibold text-light">Iniciar Sesión</RouterLink>
       </div>
     </div>
   </template>  
