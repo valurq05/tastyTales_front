@@ -1,18 +1,6 @@
-<script setup>
-    import { FormKit } from '@formkit/vue';
-    import { RouterLink } from 'vue-router';
-    import { useAuthStore } from '../stores/auth';
-    const authStore = useAuthStore()
-
-    const handleSubmit=(data)=>{
-        authStore.singUp(data)
-        }   
-</script>
-
-
 <template>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-      <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%;">
+    <div class="container-fluid d-flex justify-content-center align-items-center bg-body-secondary">
+      <div class="card w-50 p-4 shadow-sm m-5 p-5">
         <h2 class="text-center mb-4">Registrarse</h2>
         <FormKit 
           type="form" @submit="handleSubmit"
@@ -22,10 +10,10 @@
           <div class="mb-3">
             <FormKit 
               type="text" 
-              label="Usuario:" 
-              name="username" 
+              label="Documento:" 
+              name="document" 
               validation="required" 
-              :validation-messages="{ required: 'El nombre de usuario es requerido' }"
+              :validation-messages="{ required: 'El documento es requerido' }"
               input-class="form-control"
               label-class="form-label"
             />
@@ -61,21 +49,6 @@
             />
           </div>
   
-          <div class="mb-3">
-            <FormKit 
-              type="password"
-              label="Confirmar contraseña:"
-              name="password_confirm"
-              validation="required|confirm"
-              :validation-messages="{ 
-                required: 'La confirmación de contraseña es requerida.', 
-                confirm: 'Las contraseñas no coinciden.' 
-              }"
-              input-class="form-control"
-              label-class="form-label"
-            />
-          </div>
-  
           <p class="text-center mt-2 mb-4">
             <RouterLink :to="{name:'login'}" class="text-decoration-none">¿Ya tiene una cuenta? Inicie sesión aquí</RouterLink>
           </p>
@@ -105,8 +78,30 @@
     </div>
   </template>
   
+  <script setup>
+  import { FormKit } from '@formkit/vue';
+  import { useRouter, RouterLink } from 'vue-router';
+  import { useAuthStore } from '../stores/authStore.js';
+  const authStore = useAuthStore();
+  const router = useRouter();
+
+  const handleSubmit = async (formData) =>{
+  try {
+    const document = formData.document;
+    const email = formData.email;
+    const password = formData.password;
+    await authStore.register(document, email, password);
+  } catch (error) {
+    console.log(error);
+  }
+  }   
+
+</script>
+
   
     
     <style scoped>
-    
+    .container-fluid{
+    background-color: #e0dcdc;
+}
     </style>

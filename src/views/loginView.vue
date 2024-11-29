@@ -1,18 +1,6 @@
-<script setup>
-    import {FormKit} from '@formkit/vue';
-    import { RouterLink } from 'vue-router';
-    import { useAuthStore } from '../stores/auth';
-    const authStore = useAuthStore()
-
-    const handleSubmit=(data)=>{
-        authStore.login(data)
-    }
-    
-</script>
-
 <template>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-      <div class="card p-4 shadow-sm" style="max-width: 500px; width: 100%;">
+    <div class="container-fluid d-flex justify-content-center align-items-center bg-body-secondary">
+      <div class="card w-50 p-4 shadow-sm m-5">
         <h2 class="text-center mb-4">Iniciar Sesión</h2>
         <FormKit 
           type="form" @submit="handleSubmit" 
@@ -22,9 +10,9 @@
           <div class="mb-3">
             <FormKit 
               type="email" 
-              label="Correo electrónico:" 
+              label="Usuario" 
               name="email" 
-              validation="required|email" 
+              validation="required|email"
               :validation-messages="{
                 required: 'El correo electrónico es requerido.', 
                 email: 'Por favor ingrese un correo electrónico válido.'
@@ -80,7 +68,35 @@
     </div>
   </template>
   
+  <script setup>
+  import { useAuthStore } from '../stores/authStore.js'
+  import { useRouter } from 'vue-router'
+  
+  const authStore = useAuthStore()
+  const router = useRouter()
+  
+  const handleSubmit = async (formData) => {
+  try {
+    const email = formData.email; 
+    const password = formData.password;
+
+    await authStore.access(email, password);
+
+    const token = localStorage.getItem('Token');
+    if (token != undefined) {
+      router.push('/home');
+    } else {
+      console.log('Error en el inicio de sesión');
+    }
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+</script>
 
 <style scoped>
-
+.container-fluid{
+    background-color: #e0dcdc;
+}
 </style>
