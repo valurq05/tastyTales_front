@@ -28,16 +28,6 @@ const router = createRouter({
                 path:"/register",
                 name:"register",
                 component: RegisterView
-                },
-                {
-                path:"/recipes",
-                name:"recipes",
-                component: RecipesView
-                },
-                {
-                path:"/recipe/:id",
-                name:"recipeDetails",
-                component: RecipeDetailView
                 }
                     ]
         },
@@ -55,6 +45,22 @@ const router = createRouter({
                 meta: {
                     auth: true
                   }
+            },
+            {
+              path:"/recipes",
+              name:"recipes",
+              component: RecipesView,
+              meta: {
+                auth: true
+              }
+            },
+            {
+              path:"/recipe/:id",
+              name:"recipeDetails",
+              component: RecipeDetailView,
+              meta: {
+                auth: true
+              }
             }
         ]
         }

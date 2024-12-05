@@ -1,12 +1,26 @@
 <script setup>
-    import RecipeItem from '../components/recipes/recipeItem.vue';
-    import { useRecipesStore } from '../stores/recipeStore';
 
-    const recipesStore= useRecipesStore();
+import RecipeItem from '../components/recipes/recipeItem.vue';
+import { useRecipesStore } from '../stores/recipeStore';
+import { onMounted, ref } from 'vue'
+
+const recipesStore = useRecipesStore();
+const recipes = ref([]);
+
+onMounted(async () => {
+  recipes.value = await recipesStore.readRecipes();
+  console.log(recipes.value);
+})
+    
 </script>
 <template>
     <div class="container mt-5">
       <div class="row g-4">
+        <!-- <div
+          class="containerCardRecipe col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch"
+          v-for="(recipesItem, index) in recipes.value" :key="index">
+           <p>{{  recipesItem.recetaTitulo }}</p>
+        </div> -->
         <div
           class="containerCardRecipe col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch"
           v-for="recipe in recipesStore.recipes"
