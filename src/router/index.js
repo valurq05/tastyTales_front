@@ -4,6 +4,8 @@ import LandingView from "../views/landingView.vue";
 import RegisterView from "../views/registerView.vue";
 import UserHomeView from "../views/userHomeView.vue";
 import { useAuthStore } from '../stores/authStore.js'
+import RecipesView from "../views/recipesView.vue";
+import RecipeDetailView from "../views/recipeDetailView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +29,16 @@ const router = createRouter({
                 name:"register",
                 component: RegisterView
                 },
+                {
+                path:"/recipes",
+                name:"recipes",
+                component: RecipesView
+                },
+                {
+                path:"/recipe/:id",
+                name:"recipeDetails",
+                component: RecipeDetailView
+                }
                     ]
         },
         {
