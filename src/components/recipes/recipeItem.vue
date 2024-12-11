@@ -1,29 +1,39 @@
 <script setup >
+import { ref, watchEffect } from 'vue';
+
+const recipes = ref([]);
     const props=defineProps({
         recipe: {
             type:Object,
             required:true
         }
     });
+
+    watchEffect(()=>{
+        recipes.value = (props.recipe)?props.recipe: [];
+        console.log(recipes.value);
+    });
+
 </script>
 
 <template>
     <div class="d-flex justify-content-center mt-5">
     <div class="card recipe-card">
-      <img :src=" recipe.image " class="card-img-top" alt="Receta">
+      <img src="" class="card-img-top" alt="Receta">
       <div class="card-body">
-        <h5 class="card-title">{{ recipe.name }}</h5>
-        <p class="card-text">{{ recipe.shortDescription }}</p>
+        <h5 class="card-title">{{ recipes.recetaTitulo }}</h5>
+        <p class="card-text">{{ recipes.shortDescription }}</p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="rating">
             <i class="bi bi-star-fill"></i>
-            <span>{{ recipe.qualification }}</span>
+            <span>{{ recipes.calificacion }}</span>
           </div>
           <RouterLink to="recipe/:id" class="btn btn-ver-receta">Ver receta</RouterLink>
         </div>
       </div>
     </div>
   </div>
+  <pre>{{ recipes }}</pre>
 </template>
 
 <style>

@@ -4,7 +4,8 @@ import { defineStore } from "pinia";
 export const useRecipesStore = defineStore("recipe", ()=>{
     
   const RECIPES_URL = '/recetas'
-  const recipes = []
+  const recipes = ref([])
+  const recipe = ref({})
 
   const readRecipes = async() => {
   try {
@@ -16,11 +17,24 @@ export const useRecipesStore = defineStore("recipe", ()=>{
     console.log(error);
   }
   }
+
+  const readRecipeById = async(id) => {
+    try {
+      const res = await axios.get(RECIPES_URL + `/${id}`);
+      recipe.value = res.data;
+      console.log(res.data);
+      return recipe;
+    } catch (error) {
+      console.log(error);
+    }
+    }
    
   readRecipes()
   return{
     useRecipesStore,
     readRecipes,
-    recipes
+    readRecipeById,
+    recipes,
+    recipe,
   }
 });

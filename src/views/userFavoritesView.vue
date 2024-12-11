@@ -7,7 +7,7 @@
       <p>No tienes recetas favoritas</p>
     </div>
 
-    <div v-else class="d-flex justify-content-center mt-5">
+    <div v-else-if="Userrecipes.length > 0" class="d-flex justify-content-center mt-5">
       <div class="card recipe-card" v-for="(recipe, index) in Userrecipes.value" :key="index">
         <img class="card-img-top" src="../assets/arrozpollo.jpg" alt="Receta"/>
         <div class="card-body">

@@ -1,34 +1,35 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useRecipesStore } from '../stores/recipeStore';
+import cryptoJS from 'crypto-js';
 
+const recipesStore = useRecipesStore();
+const recipes = ref([]);
+let encr_password = 'clave-secreta';
 
-const popularRecipes = ref([
-  {
-    title: "Arroz con Pollo",
-    description: "Un plato tradicional colombiano lleno de sabor, perfecto para cualquier ocasión.",
-    image: "src/assets/Ensalada-pollo-vinagreta-limon.webp",
-    rating: 4.7,
-  },
-  {
-    title: "Pasta Alfredo",
-    description: "Una cremosa y deliciosa pasta ideal para cenas familiares o con amigos.",
-    image: "src/assets/Ensalada-pollo-vinagreta-limon.webp",
-    rating: 4.8,
-  },
-  {
-    title: "Ensalada César",
-    description: "Una opción saludable y rápida, ideal para un almuerzo ligero y nutritivo.",
-    image: "src/assets/Ensalada-pollo-vinagreta-limon.webp",
-    rating: 4.5,
-  },
-  {
-    title: "Lasagna de Carne",
-    description: "Capas de sabor que combinan carne, queso y salsa en perfecta armonía.",
-    image: "src/assets/Ensalada-pollo-vinagreta-limon.webp",
-    rating: 4.9,
-  },
-]);
+onMounted(async () => {
+  recipes.value = await recipesStore.readRecipes();
+})
 
+const calif = (cal) =>{
+  if(cal == 1){
+    return "1";
+  }else if(cal == 2){
+    return "2";
+  }else if(cal == 3){
+    return "3";
+  }else if(cal == 4){
+    return "4";
+  }else if(cal == 5){
+    return "5";
+  }else{
+    return "Sin calificaciones";
+  }
+}
+
+const encrypted = (id) =>{
+  return encodeURIComponent(cryptoJS.AES.encrypt(id.toString(), encr_password).toString());
+}
 const culinaryCreations = ref([
   {
     title: "Papas Asadas con Especias",
@@ -99,17 +100,17 @@ function scrollRight() {
       <div class="popular-recipes">
         <h3 class="mb-4 text-center fw-bold text-dark">Recetas más populares de la semana</h3>
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-3 mb-4" v-for="(recipe, index) in popularRecipes" :key="index">
+          <div class="col-12 col-md-6 col-lg-3 mb-4" v-for="(recipe, index) in recipesStore.recipes" :key="index">
             <div class="card">
-              <img :src="recipe.image" class="card-img-top" :alt="recipe.title">
+              <img :src="`src/assets/recipes/receta-${index}.jpg`" class="card-img-top" :alt="recipe.recetaTitulo">
               <div class="card-body">
-                <h5 class="card-title fw-bold">{{ recipe.title }}</h5>
-                <p class="card-text">{{ recipe.description }}</p>
+                <h5 class="card-title fw-bold">{{ recipe.recetaTitulo }}</h5>
+                <p class="card-text">{{ recipe.recetadescripcion }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <span class="rating">
-                    <i class="fas fa-star text-warning"></i> {{ recipe.rating }}
+                    <i class="fas fa-star text-warning"></i> {{ calif(recipe.calificacion) }}
                   </span>
-                  <RouterLink to="#" class="btn btn-custom btn-sm">Ver receta</RouterLink>
+                  <RouterLink :to="`recipe/${encrypted(recipe.recetaID)}`" class="btn btn-custom btn-sm">Ver receta</RouterLink>
                 </div>
               </div>
             </div>

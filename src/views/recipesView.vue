@@ -2,15 +2,15 @@
 
 import RecipeItem from '../components/recipes/recipeItem.vue';
 import { useRecipesStore } from '../stores/recipeStore';
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 
 const recipesStore = useRecipesStore();
 const recipes = ref([]);
 
 onMounted(async () => {
   recipes.value = await recipesStore.readRecipes();
-  console.log(recipes.value);
 })
+
     
 </script>
 <template>
@@ -24,12 +24,14 @@ onMounted(async () => {
         <div
           class="containerCardRecipe col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch"
           v-for="recipe in recipesStore.recipes"
-          :key="recipe.name"
         >
           <RecipeItem :recipe="recipe"/>
         </div>
       </div>
     </div>
+
+    <!-- <pre v-for="recipe in recipesStore.recipes"
+    >{{recipe.recetaID}}</pre> -->
 </template>
 
 <style scoped>
