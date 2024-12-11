@@ -63,6 +63,22 @@ const router = createRouter({
               meta: {
                 auth: true
               }
+            },
+            {
+              path:"/favorites",
+              name:"userFavorites",
+              component: userFavoritesView,
+              meta: {
+                auth: true
+              }
+            },
+            {
+              path:"/profile",
+              name:"userProfile",
+              component: userProfileView,
+              meta: {
+                auth: true
+              }
             }
         ]
         }

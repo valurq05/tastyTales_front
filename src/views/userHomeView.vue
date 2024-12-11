@@ -140,7 +140,7 @@ function scrollRight() {
       </div>
       <div class="carousel-wrapper d-flex align-items-center">
         <button class="carousel-control-prev" @click="scrollLeft">
-          <i class=""><</i>
+          <i class=""></i>
         </button>
         <div class="carousel d-flex">
           <div class="card" v-for="(recipe, index) in culinaryCreations" :key="index">
