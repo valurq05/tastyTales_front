@@ -2,12 +2,7 @@
     <div class="main-page p-5">
       <h1 class="text-white">Recetas Favoritas</h1>
     </div>
-  
-    <div v-if="Userrecipes.length === 0" class="text-center mt-5">
-      <p>No tienes recetas favoritas</p>
-    </div>
-
-    <div v-else-if="Userrecipes.length > 0" class="d-flex justify-content-center mt-5">
+    <div v-if="Userrecipes" class="d-flex justify-content-center mt-5">
       <div class="card recipe-card" v-for="(recipe, index) in Userrecipes.value" :key="index">
         <img class="card-img-top" src="../assets/arrozpollo.jpg" alt="Receta"/>
         <div class="card-body">
@@ -23,11 +18,15 @@
         </div>
       </div>
     </div>
+
+    <div v-else-if="!Userrecipes" class="text-center mt-5">
+      <p>No tienes recetas favoritas</p>
+    </div>
   </template>
 
 <script setup>
 import { useUserStore } from '../stores/userStore';
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 
 const userStore = useUserStore();
 const Userrecipes = ref([]);
@@ -37,6 +36,10 @@ onMounted(async () => {
     console.log(use_id)
     Userrecipes.value = await userStore.readFavRecipes(use_id);
     console.log(Userrecipes.value);
+})
+
+watchEffect(() => {
+    console.log(Userrecipes.length);
 })
 </script>
 
