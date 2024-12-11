@@ -13,20 +13,22 @@ export const useAuthStore = defineStore('user', () => {
         userNombre: use_mail,
         userPassword: use_password
       })
-      console.log(res.data);
+      console.log(res.data.data);
       token.value = res.data.data.token
-      authUser.value = res.data.user
+      authUser.value = res.data.data.user
       localStorage.setItem('Token', token.value);
       console.log(authUser.value);
-      localStorage.setItem('User', authUser.value);
+      localStorage.setItem('User', JSON.stringify(authUser.value));
     } catch (error) {
       showSwalAlert('', error.response.data.message, 'error');
     }
   }
 
-  const register = async (use_document, use_mail, use_password) => {
+  const register = async (per_name, per_lastname, use_document, use_mail, use_password) => {
     try {
       const res = await axios.post('/register', {
+        perName: per_name,
+        perLastName: per_lastname,
         userDoc: use_document,
         userNombre: use_mail,
         userPassword: use_password

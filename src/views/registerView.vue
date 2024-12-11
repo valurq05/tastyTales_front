@@ -10,6 +10,30 @@
           <div class="mb-3">
             <FormKit 
               type="text" 
+              label="Nombre:" 
+              name="Nombre" 
+              validation="required" 
+              :validation-messages="{ required: 'El Nombre es requerido' }"
+              input-class="form-control"
+              label-class="form-label"
+            />
+          </div>
+
+          <div class="mb-3">
+            <FormKit 
+              type="text" 
+              label="Apellido:" 
+              name="Apellido"
+              validation="required" 
+              :validation-messages="{ required: 'El apellido es requerido' }"
+              input-class="form-control"
+              label-class="form-label"
+            />
+          </div>
+
+          <div class="mb-3">
+            <FormKit 
+              type="text" 
               label="Documento:" 
               name="document" 
               validation="required" 
@@ -87,10 +111,12 @@
 
   const handleSubmit = async (formData) =>{
   try {
+    const name= formData.name;
+    const lastName= formData.lastName;
     const document = formData.document;
     const email = formData.email;
     const password = formData.password;
-    await authStore.register(document, email, password);
+    await authStore.register(name, lastName, document, email, password);
   } catch (error) {
     console.log(error);
   }
