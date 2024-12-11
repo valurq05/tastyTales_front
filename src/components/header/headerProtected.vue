@@ -12,9 +12,6 @@
           <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-semibold" href="#">Descubrir</a>
-        </li>
-        <li class="nav-item">
           <RouterLink to="favorites" class="btn text-white fw-semibold">Favoritos</RouterLink>
         </li>
         <li class="nav-item">

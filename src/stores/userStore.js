@@ -1,10 +1,11 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
 export const useUserStore = defineStore("usuario", ()=>{
     
   const USERFAVS_URL = '/recetas-favoritas'
-  const userRecipes = []
+  const userRecipes = ref([]);
 
   const readFavRecipes = async(use_id) => {
   try {
@@ -12,7 +13,7 @@ export const useUserStore = defineStore("usuario", ()=>{
     console.log(res.data);
     userRecipes.value = res.data;
     console.log(res.data);
-    return userRecipes;
+    return userRecipes.value;
   } catch (error) {
     console.log(error);
   }
