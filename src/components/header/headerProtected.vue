@@ -5,26 +5,23 @@
       <a href="#" class="logo-link"></a>
     </div>
 
-    <!-- Sección del menú de navegación -->
     <div class="nav-container">
       <ul class="nav d-flex align-items-center justify-content-end">
-        <!-- Barra de búsqueda -->
         <li class="nav-item search-bar d-flex align-items-center me-3">
           <input class="form-control me-2" type="text" placeholder="Search..">
           <a href="#" class="search-icon"><i class="bi bi-search"></i></a>
         </li>
-        <!-- Enlaces de navegación -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Descubrir</a>
+          <a class="nav-link text-white fw-semibold" href="#">Descubrir</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Favoritos</a>
+          <RouterLink to="favorites" class="btn text-white fw-semibold">Favoritos</RouterLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Mi Perfil</a>
+          <RouterLink to="profile" class="btn text-white fw-semibold">Mi Perfil</RouterLink>
         </li>
         <li class="nav-item">
-          <button class="btn text-white" @click="logout"><i class="bi bi-box-arrow-right"></i> Salir</button>
+          <button class="btn text-white fw-semibold" @click="logout"><i class="bi bi-box-arrow-right"></i> Salir</button>
         </li>
       </ul>
     </div>

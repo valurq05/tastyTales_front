@@ -6,6 +6,8 @@ import UserHomeView from "../views/userHomeView.vue";
 import { useAuthStore } from '../stores/authStore.js'
 import RecipesView from "../views/recipesView.vue";
 import RecipeDetailView from "../views/recipeDetailView.vue";
+import userFavoritesView from "../views/userFavoritesView.vue";
+import userProfileView from "../views/userProfileView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,12 +41,12 @@ const router = createRouter({
         },
         children: [
             {
-                path:"/home",
-                name:"home",
-                component: UserHomeView,
-                meta: {
-                    auth: true
-                  }
+              path:"/home",
+              name:"home",
+              component: UserHomeView,
+              meta: {
+                  auth: true
+                }
             },
             {
               path:"/recipes",
@@ -58,6 +60,22 @@ const router = createRouter({
               path:"/recipe/:id",
               name:"recipeDetails",
               component: RecipeDetailView,
+              meta: {
+                auth: true
+              }
+            },
+            {
+              path:"/favorites",
+              name:"userFavorites",
+              component: userFavoritesView,
+              meta: {
+                auth: true
+              }
+            },
+            {
+              path:"/profile",
+              name:"userProfile",
+              component: userProfileView,
               meta: {
                 auth: true
               }
