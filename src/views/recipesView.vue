@@ -26,7 +26,7 @@ onMounted(async () => {
           v-for="recipe in recipesStore.recipes"
           :key="recipe.name"
         >
-          <RecipeItem :recipe="recipe" />
+          <RecipeItem :recipe="recipe"/>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import axios from 'axios'
 export const useAuthStore = defineStore('user', () => {
   const token = ref()
   const authUser = ref(null);
+  const use_id = ref();
 
   const access = async (use_mail, use_password) => {
     try {
@@ -16,8 +17,10 @@ export const useAuthStore = defineStore('user', () => {
       console.log(res.data.data);
       token.value = res.data.data.token
       authUser.value = res.data.data.user
+      use_id.value = res.data.data.user.userID
       localStorage.setItem('Token', token.value);
       console.log(authUser.value);
+      localStorage.setItem('USE_ID', use_id.value);
       localStorage.setItem('User', JSON.stringify(authUser.value));
     } catch (error) {
       showSwalAlert('', error.response.data.message, 'error');
@@ -57,8 +60,11 @@ export const useAuthStore = defineStore('user', () => {
     authUser.value = null
     localStorage.removeItem('Token');
   }
+  
  
   return {
+    useAuthStore,
+    authUser,
     token,
     access,
     register,

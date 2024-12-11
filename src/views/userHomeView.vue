@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
 
 const popularRecipes = ref([
   {
@@ -84,10 +85,10 @@ function scrollRight() {
           <div>
             <div class="profile-heading d-flex align-items-center">
               <img class="profile-img me-3" src="../assets/4fd8c349-a322-4baa-bfc1-4e9242bf571f_3.jpeg" alt="Profile Picture">
-              <h2 class="fw-bold text-dark">Bienvenida, Valentina.</h2>
+              <h2 class="m-2 fw-bold text-black">Bienvenidx</h2>
             </div>
-            <p class="font-italic text-dark">Disfruta de recetas nuevas y comparte tus creaciones</p>
-            <RouterLink to="register" class="btn btn-custom fw-semibold mt-3">Crea una nueva receta</RouterLink>
+            <p class="font-italic text-dark mt-2">Disfruta de recetas nuevas y comparte tus creaciones</p>
+            <RouterLink to="register" class="btn btn-custom fw-semibold">Crea una nueva receta</RouterLink>
           </div>
         </div>
       </div>

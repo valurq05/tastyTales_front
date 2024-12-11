@@ -25,6 +25,7 @@
     </div>
   </div>
 </template>
+
 <style>
     .recipe-card {
       width: 18rem;

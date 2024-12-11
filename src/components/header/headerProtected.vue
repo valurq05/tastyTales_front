@@ -2,7 +2,7 @@
   <div class="header d-flex align-items-center justify-content-between py-3">
     <!-- Sección del logo -->
     <div class="logo">
-      <a href="#" class="logo-link"></a>
+      <RouterLink :to="{name:'home'}" class="logo-link"></RouterLink>
     </div>
 
     <div class="nav-container">
