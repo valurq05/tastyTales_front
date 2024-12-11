@@ -13,4 +13,5 @@
 .main-page{
   background: linear-gradient(#ac1c24, #4f0f15);
 }
+
 </style>

@@ -30,7 +30,22 @@ const router = createRouter({
                 path:"/register",
                 name:"register",
                 component: RegisterView
-                }
+                },
+                {
+                  path:"/favorites",
+                  name:"userFavorites",
+                  component: userFavoritesView
+                },
+                {
+                  path:"/profile",
+                  name:"userProfile",
+                  component: userProfileView
+                },
+                {
+                  path:"/home",
+                  name:"home",
+                  component: UserHomeView
+                },
                     ]
         },
         {
@@ -40,14 +55,6 @@ const router = createRouter({
           auth: true
         },
         children: [
-            {
-              path:"/home",
-              name:"home",
-              component: UserHomeView,
-              meta: {
-                  auth: true
-                }
-            },
             {
               path:"/recipes",
               name:"recipes",
@@ -60,22 +67,6 @@ const router = createRouter({
               path:"/recipe/:id",
               name:"recipeDetails",
               component: RecipeDetailView,
-              meta: {
-                auth: true
-              }
-            },
-            {
-              path:"/favorites",
-              name:"userFavorites",
-              component: userFavoritesView,
-              meta: {
-                auth: true
-              }
-            },
-            {
-              path:"/profile",
-              name:"userProfile",
-              component: userProfileView,
               meta: {
                 auth: true
               }
