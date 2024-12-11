@@ -11,7 +11,7 @@
             <FormKit 
               type="text" 
               label="Nombre:" 
-              name="Nombre" 
+              name="name" 
               validation="required" 
               :validation-messages="{ required: 'El Nombre es requerido' }"
               input-class="form-control"
@@ -23,7 +23,7 @@
             <FormKit 
               type="text" 
               label="Apellido:" 
-              name="Apellido"
+              name="lastName"
               validation="required" 
               :validation-messages="{ required: 'El apellido es requerido' }"
               input-class="form-control"

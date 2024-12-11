@@ -8,20 +8,25 @@ import cryptoJS from 'crypto-js';
 let encr_password = 'clave-secreta';
 const recipeStore = useRecipesStore(); 
 const recipe = ref({});
+const loading = ref(true);
 
 onMounted(async () => {
+  loading.value = true;
   const id = decodeURIComponent(cryptoJS.AES.decrypt(router.currentRoute.value.params.id.toString(), encr_password).toString(cryptoJS.enc.Utf8));
   console.log(id);
   recipe.value = await recipeStore.readRecipeById(id);
-  console.log(recipe.value);
+  console.log(recipe.value.recipe);
+  loading.value = false;
 })
 watchEffect(() => {
   console.log(recipe.value);
 })
-
 </script>
 <template>
-    <div class="container mt-4">
+  <div v-if="loading" class="text-center mt-5">
+    <p>Cargando receta...</p>
+  </div>
+    <div v-else-if="!loading"class="container mt-4">
       <!-- Encabezado -->
       <div class="row align-items-center">
         <div class="col-lg-8">

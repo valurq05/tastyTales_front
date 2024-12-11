@@ -22,13 +22,13 @@ export const useRecipesStore = defineStore("recipe", ()=>{
   const readRecipeById = async(id) => {
     try {
       const res = await axios.get(RECIPES_URL + `/${id}`);
-      recipe.value = res.data;
-      console.log(res.data);
+      recipe.value = res.data.data;
+      console.log(recipe.value);
       return recipe;
     } catch (error) {
       console.log(error);
     }
-    }
+  }
    
   readRecipes()
   return{
