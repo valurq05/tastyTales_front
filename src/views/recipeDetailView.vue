@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref, watch, watchEffect } from 'vue';
 import router from '../router';
 import { useRecipesStore } from '../stores/recipeStore';
 import cryptoJS from 'crypto-js';
@@ -7,12 +7,15 @@ import cryptoJS from 'crypto-js';
 
 let encr_password = 'clave-secreta';
 const recipeStore = useRecipesStore(); 
-const recipe = ref([]);
+const recipe = ref({});
 
 onMounted(async () => {
   const id = decodeURIComponent(cryptoJS.AES.decrypt(router.currentRoute.value.params.id.toString(), encr_password).toString(cryptoJS.enc.Utf8));
   console.log(id);
   recipe.value = await recipeStore.readRecipeById(id);
+  console.log(recipe.value);
+})
+watchEffect(() => {
   console.log(recipe.value);
 })
 
