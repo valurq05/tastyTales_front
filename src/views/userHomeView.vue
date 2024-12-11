@@ -7,10 +7,20 @@ import { useAuthStore } from '../stores/authStore';
 const authStore = useAuthStore();
 const recipesStore = useRecipesStore();
 const recipes = ref([]);
+let loading = ref(false);
+const per_data = ref();
+const user_data = ref();
 let encr_password = 'clave-secreta';
 
 onMounted(async () => {
-  recipes.value = await recipesStore.readRecipes();
+    loading.value = true;
+    const user_id = JSON.parse(localStorage.getItem("User"))
+    user_data.value = user_id;
+    recipes.value = await recipesStore.readRecipes();
+    console.log(user_data.value);
+    per_data.value = user_id.person;
+    console.log(per_data.value);
+    loading.value = false;
 })
 
 const calif = (cal) =>{
@@ -43,21 +53,20 @@ const flavors = ref([
   "Cocina Latinoamericana",
   "Cocina Norteamericana y Oceánica",
 ]);
-
-
 </script>
-
 
 <template>
   <div class="main-page">
-
     <div class="welcome-section container-fluid p-5">
       <div class="row align-items-center">
         <div class="col-12 col-md-8 d-flex align-items-center">
-          <div>
+          <div v-if="loading">
+            <p>Cargando tus datos de usuario......</p>
+          </div>
+          <div v-else-if="!loading && per_data">
             <div class="profile-heading d-flex align-items-center">
               <img class="profile-img me-3" src="../assets/ftuftytyrtf.jpg" alt="Profile Picture">
-              <h2 class="m-2 fw-bold text-white">Bienvenidx, Valentina.</h2>
+              <h2 class="m-2 fw-bold text-white">Bienvenidx, {{ per_data.perName }} {{ per_data.perLastName }}</h2>
             </div>
             <p class="font-italic text-white mt-2">Disfruta de recetas nuevas y comparte tus creaciones</p>
             <RouterLink to="register" class="btn btn-custom fw-semibold">Crea una nueva receta</RouterLink>
@@ -65,7 +74,6 @@ const flavors = ref([
         </div>
       </div>
     </div>
-
     <div class="popular-recipes-container mt-2">
       <div class="popular-recipes">
         <h3 class="mb-4 text-center fw-bold text-dark">Recetas más populares de la semana</h3>

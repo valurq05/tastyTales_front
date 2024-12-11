@@ -42,7 +42,7 @@
   import { onMounted, ref } from "vue";
   
   const userStore = useUserStore();
-  const Userrecipes = userStore.userRecipes;
+  const Userrecipes = userStore.userFavRecipes;
   let loading = ref(false)
   
   onMounted(async () => {

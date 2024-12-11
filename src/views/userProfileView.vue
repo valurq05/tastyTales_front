@@ -24,22 +24,54 @@
       </div>
     </div>
   </div>
+  <h2 class="text-center mt-5">Tus recetas</h2>
+    <div class="d-flex mt-5">
+      <div class="card recipe-card m-3" v-for="(recipe, index) in Userrecipes" :key="index">
+        <img
+          class="card-img-top"
+          src="../assets/arrozpollo.jpg"
+          alt="Receta"
+        />
+        <div class="card-body shadow">
+          <h5 class="card-title">{{ recipe.recetaTitulo }}</h5>
+          <p class="card-text">{{ recipe.recetaDescripcion }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="rating">
+              <i class="bi bi-star-fill"></i>
+              <span> 4.5 / 5</span>
+            </div>
+            <RouterLink
+              :to="'recipe/' + recipe.recetaID"
+              class="btn btn-ver-receta"
+              >Ver receta</RouterLink
+            >
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 </template>
 
 <script setup>
+import { useUserStore } from '../stores/userStore'
 import { onMounted, ref } from "vue";
 
+const userStore = useUserStore();
+const Userrecipes = userStore.userRecipes;
 const per_data = ref();
 const user_data = ref();
 let loading = ref(false);
 
 onMounted(async () => {
     loading.value = true;
-    const use_id = JSON.parse(localStorage.getItem("User"));
-    user_data.value = use_id;
+    const user_id = JSON.parse(localStorage.getItem("User"));
+    const use_id = localStorage.getItem("USE_ID");
+    user_data.value = user_id;
+    if (user_id) {
+      await userStore.readUserRecipes(use_id);
+    }
     console.log(user_data.value);
-    per_data.value = use_id.person;
+    per_data.value = user_id.person;
     console.log(per_data.value);
     loading.value = false;
   });

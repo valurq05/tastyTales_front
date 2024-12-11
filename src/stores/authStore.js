@@ -19,7 +19,6 @@ export const useAuthStore = defineStore('user', () => {
       authUser.value = res.data.data.user
       use_id.value = res.data.data.user.userID
       localStorage.setItem('Token', token.value);
-      console.log(authUser.value);
       localStorage.setItem('USE_ID', use_id.value);
       localStorage.setItem('User', JSON.stringify(authUser.value));
     } catch (error) {
@@ -66,7 +65,6 @@ export const useAuthStore = defineStore('user', () => {
  
   return {
     useAuthStore,
-    authUser,
     token,
     access,
     register,

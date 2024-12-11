@@ -4,7 +4,6 @@ import LandingView from "../views/landingView.vue";
 import RegisterView from "../views/registerView.vue";
 import UserHomeView from "../views/userHomeView.vue";
 import { useAuthStore } from '../stores/authStore.js'
-import RecipesView from "../views/recipesView.vue";
 import RecipeDetailView from "../views/recipeDetailView.vue";
 import userFavoritesView from "../views/userFavoritesView.vue";
 import userProfileView from "../views/userProfileView.vue";
@@ -49,14 +48,6 @@ const router = createRouter({
                 }
             },
             {
-              path:"/recipes",
-              name:"recipes",
-              component: RecipesView,
-              meta: {
-                auth: true
-              }
-            },
-            {
               path:"/recipe/:id",
               name:"recipeDetails",
               component: RecipeDetailView,
@@ -96,11 +87,9 @@ router.beforeEach(async (to, from, next) => {
     if (UserStore.token) {
           return next();
     }
-
     if (requiredAuth) {
       return next("/");
     }
-    
     return next();
 });  
 
