@@ -7,7 +7,7 @@
       <p>Cargando tus recetas favoritas...</p>
     </div>
   
-    <div v-else-if="Userrecipes.length > 0" class="d-flex mt-5">
+    <div v-else-if="Userrecipes.length > 0 && !loading" class="d-flex mt-5">
       <div class="card recipe-card m-3" v-for="(recipe, index) in Userrecipes" :key="index">
         <img
           class="card-img-top"
