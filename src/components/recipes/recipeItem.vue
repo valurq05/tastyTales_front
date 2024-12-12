@@ -19,7 +19,7 @@ const recipes = ref([]);
 <template>
     <div class="d-flex justify-content-center mt-5">
     <div class="card recipe-card">
-      <img src="" class="card-img-top" alt="Receta">
+      <img :src="`src/assets/recipes/receta-${id-1}.jpg`" class="card-img-top" alt="Receta">
       <div class="card-body">
         <h5 class="card-title">{{ recipes.recetaTitulo }}</h5>
         <p class="card-text">{{ recipes.shortDescription }}</p>

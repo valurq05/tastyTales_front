@@ -2,7 +2,7 @@
 
 import RecipeItem from '../components/recipes/recipeItem.vue';
 import { useRecipesStore } from '../stores/recipeStore';
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const recipesStore = useRecipesStore();
 const recipes = ref([]);

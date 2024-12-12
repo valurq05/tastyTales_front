@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch, watchEffect } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import router from '../router';
 import { useRecipesStore } from '../stores/recipeStore';
 import cryptoJS from 'crypto-js';
@@ -8,29 +8,29 @@ import cryptoJS from 'crypto-js';
 let encr_password = 'clave-secreta';
 const recipeStore = useRecipesStore(); 
 const recipe = ref({});
+const recipeWatch = ref({});
 const loading = ref(true);
+let id = 0;
 
 onMounted(async () => {
   loading.value = true;
-  const id = decodeURIComponent(cryptoJS.AES.decrypt(router.currentRoute.value.params.id.toString(), encr_password).toString(cryptoJS.enc.Utf8));
+  id = decodeURIComponent(cryptoJS.AES.decrypt(router.currentRoute.value.params.id.toString(), encr_password).toString(cryptoJS.enc.Utf8));
   console.log(id);
   recipe.value = await recipeStore.readRecipeById(id);
-  console.log(recipe.value.recipe);
+  console.log(recipe.value);
   loading.value = false;
 })
-watchEffect(() => {
-  console.log(recipe.value);
-})
+
 </script>
 <template>
   <div v-if="loading" class="text-center mt-5">
     <p>Cargando receta...</p>
   </div>
-    <div v-else-if="!loading"class="container mt-4">
+  <div v-else-if="!loading"class="container mt-4">
       <!-- Encabezado -->
       <div class="row align-items-center">
         <div class="col-lg-8">
-          <h1 class="display-5"></h1>
+          <h1 class="display-5">{{ recipe.value.recetaTitulo}}</h1>
         </div>
         <div class="col-lg-4 text-end">
           <button class="btn btn-outline-danger btn-rounded shadow-sm">Descargar Receta</button>
@@ -43,41 +43,24 @@ watchEffect(() => {
         <!-- Sección izquierda -->
         <div class="col-lg-8">
           <img
-            src="https://img.rtve.es/imagenes/receta-tiramisu-trucos-jugoso-facil-rapido/1684846876915.jpg"
+            :src="`/src/assets/recipes/receta-${id-1}.jpg`"
             alt="Tiramisu"
             class="img-fluid rounded shadow-sm"
           />
           <p class="mt-3">
-            El tiramisú es un postre italiano clásico y delicioso que combina capas de bizcochos de soletilla empapados en café expreso con una mezcla suave y cremosa de queso mascarpone, huevos y azúcar.
+            {{ recipe.value.recetaDescripcion}}
           </p>
   
           <h3 class="mt-4">Lista de Ingredientes</h3>
           <ul>
-            <li>300 g de bizcochos de soletilla</li>
-            <li>500 gramos de queso mascarpone</li>
-            <li>4 huevos grandes (separados en yemas y claras)</li>
-            <li>100 g de azúcar</li>
-            <li>300 ml de café expreso fuerte (enfriado)</li>
-            <li>30 ml de licor de amaretto o marsala</li>
-            <li>Cacao en polvo para decorar</li>
+            <li v-for="item in recipe.value.ingredients">{{`${parseInt(item.ingrRecCantidad)} ${item.medNombre.toLowerCase()} de ${item.ingredNombre}`}}</li>
           </ul>
   
           <h3 class="mt-4">Paso a Paso</h3>
           <ol>
-            <li class="d-flex align-items-center mb-3">
-              Preparar el café y dejarlo enfriar.
-              <button class="btn btn-outline-primary btn-sm ms-auto">Cronómetro</button>
-            </li>
-            <li class="d-flex align-items-center mb-3">
-              Separar las claras de las yemas y batir cada una con azúcar.
-              <button class="btn btn-outline-primary btn-sm ms-auto">Cronómetro</button>
-            </li>
-            <li class="d-flex align-items-center mb-3">
-              Montar el tiramisú en capas alternando bizcochos empapados en café.
-              <button class="btn btn-outline-primary btn-sm ms-auto">Cronómetro</button>
-            </li>
-            <li class="d-flex align-items-center mb-3">
-              Refrigerar y espolvorear cacao en polvo antes de servir.
+            <li v-for="paso in recipe.value.steps" :key="paso.id"  
+            class="d-flex align-items-center mb-3">
+              {{ paso.pasoDescripcion}}
               <button class="btn btn-outline-primary btn-sm ms-auto">Cronómetro</button>
             </li>
           </ol>
