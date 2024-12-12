@@ -7,6 +7,7 @@ import { useAuthStore } from '../stores/authStore.js'
 import RecipeDetailView from "../views/recipeDetailView.vue";
 import userFavoritesView from "../views/userFavoritesView.vue";
 import userProfileView from "../views/userProfileView.vue";
+import CreateRecipeView from "../views/createRecipeView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,7 +37,7 @@ const router = createRouter({
         path: '/protected',
         component: () => import('../components/layout/protectedLayoutComponent.vue'),
         meta: {
-          auth: true
+          // auth: true
         },
         children: [
             {
@@ -44,7 +45,7 @@ const router = createRouter({
               name:"home",
               component: UserHomeView,
               meta: {
-                  auth: true
+                  //auth: true
                 }
             },
             {
@@ -52,7 +53,7 @@ const router = createRouter({
               name:"recipeDetails",
               component: RecipeDetailView,
               meta: {
-                auth: true
+                //auth: true
               }
             },
             {
@@ -60,7 +61,7 @@ const router = createRouter({
               name:"userFavorites",
               component: userFavoritesView,
               meta: {
-                auth: true
+                //auth: true
               }
             },
             {
@@ -68,7 +69,15 @@ const router = createRouter({
               name:"userProfile",
               component: userProfileView,
               meta: {
-                auth: true
+                //auth: true
+              }
+            },
+            {
+              path:"/createRecipe",
+              name:"createRecipe",
+              component: CreateRecipeView,
+              meta: {
+                //auth: true
               }
             }
         ]
